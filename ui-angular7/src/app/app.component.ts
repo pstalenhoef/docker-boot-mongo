@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Address } from './model/address.model';
+import { Access } from './model/access.model';
+import { SearchResult } from './model/searchresult.model';
 
 @Component({
   selector: 'app-root',
@@ -23,19 +26,17 @@ export class AppComponent {
   // URL's should move to configuration
   url_auth = 'https://localhost:9443/auth/oauth/token?grant_type=password&scope=webclient&username=paul.stalenhoef&password=password1';
   url_search = 'https://localhost:8443/searchservice/api/v1/search/';
-
-  pageNr = 1;
-  currentPage: number;
-  numberOfPages: number;
-  addressList: Address[];
-  entry: Address;
-
   headerDict = {
     'Accept': 'application/json',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-type': 'application/x-www-form-urlencoded; charset=utf-8',
     'Authorization': 'Basic Y29pbmNsaWVudDpjb2luc2VjcmV0'
   };
+  pageNr = 1;
+  currentPage: number;
+  numberOfPages: number;
+  addressList: Address[];
+  entry: Address;
 
   requestOptions = {
     headers: new HttpHeaders(this.headerDict),
@@ -56,11 +57,6 @@ export class AppComponent {
       this.authenticated = true;
     });
   }
-  // logout() {
-  //     this.http.post('logout', {}).finally(() => {
-  //         this.authenticated = false;
-  //     }).subscribe();
-  // }
 
   public search() {
     this.pageNr = 1;
@@ -92,36 +88,10 @@ export class AppComponent {
       this.addressList = searchResult['addressList'];
       this.results = true;
     });
-
-    console.log('Searching');
   }
 
   public showDetails(event: number) {
     this.selected = true;
     this.entry = this.addressList[event];
   }
-}
-
-export interface Access {
-  access_token: string;
-  token_type: string;
-  refresh_token: string;
-  expires_in: string;
-  scope: string;
-}
-
-export interface SearchResult {
-  currentpage: number;
-  numberOfPages: number;
-  addressList: Address[];
-}
-
-export interface Address {
-  id: string;
-  companyName: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  phoneNumber: string;
-  gender: string;
 }

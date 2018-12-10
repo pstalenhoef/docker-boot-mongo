@@ -1,2 +1,4 @@
 .idea/
 authenticationservice/.mvn/
+ui/.settings/
+ui/node/node_modules/npm/bin/npm

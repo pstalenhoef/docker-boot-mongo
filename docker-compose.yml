@@ -1,0 +1,39 @@
+version: '3.0'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "28017:27017"
+
+  mongo_seed:
+    build: ./mongo-seed
+    environment:
+      - MONGOSERVER=mongodb
+      - DATABASE=assessment
+      - COLLECTION_ADDRESS=address
+      - COLLECTION_ADDRESS_PERSONS=address_person
+      - COLLECTION_ADDRESS_COMPANIES=address_company
+    links:
+      - mongodb
+
+  authenticationservice:
+    build: ./authenticationservice
+    ports:
+      - "9443:8443"
+
+  searchservice:
+    build: ./searchservice
+    ports:
+      - "8443:8443"
+    links:
+      - mongodb
+      - authenticationservice
+      
+  ui:
+    build: ./ui
+    ports:
+      - "7443:8443"
+    links:
+      - searchservice
+      - authenticationservice

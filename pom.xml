@@ -11,6 +11,6 @@
 	<modules>
 		<module>authenticationservice</module>
 		<module>searchservice</module>
-		<module>ui</module>
+		<module>ui-angular7</module>
 	</modules>
 </project>

@@ -5,3 +5,5 @@ ui/node
 ui/node_modules
 ui/.vscode
 ui/target
+ui-angular7/node
+ui-angular7/node_modules

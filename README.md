@@ -7,4 +7,4 @@ After a checkout of this repository the following commands should get things up 
 * docker-compose up --build
 
 Application should be accesible at:
-http://localhost:7443
+https://localhost:7443

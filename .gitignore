@@ -1,4 +1,7 @@
 .idea/
 authenticationservice/.mvn/
 ui/.settings/
-ui/node/node_modules/npm/bin/npm
+ui/node
+ui/node_modules
+ui/.vscode
+ui/target
